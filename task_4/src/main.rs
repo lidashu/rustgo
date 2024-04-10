@@ -50,6 +50,31 @@ fn sound(animal: &Animals) {
     }
 }
 
+trait AddTrait<T> {
+    fn add(a1:T, a2:T) -> T;
+}
+
+struct Integer {
+    value: i32
+}
+
+struct Float {
+    value: f32
+}
+
+impl AddTrait<Integer> for Integer {
+    fn add(a1: Integer, a2: Integer) -> Integer{
+        Integer{value: a1.value + a2.value}
+    }
+}
+
+impl AddTrait<Float> for Float {
+    fn add(a1: Float, a2: Float) -> Float{
+        Float{value: a1.value + a2.value}
+    }
+}
+
+
 fn main() {
     // use enum
     let black_cat = Animals::Cats(String::from("xiaohei"), String::from("miaomiao"));
@@ -75,5 +100,16 @@ fn main() {
     for x in ans {
         x.talk();
     }
+
+    // impl add
+    let int_10 = Integer{value:10};
+    let int_20 = Integer{value:20};
+    let int_30 = Integer::add(int_10, int_20);
+    println!("{}", int_30.value);
+
+    let float_10_23123 = Float{value:10.23123};
+    let float_20_123573 = Float{value:20.123573};
+    let float_30 = Float::add(float_10_23123, float_20_123573);
+    println!("{}", float_30.value);
 
 }
